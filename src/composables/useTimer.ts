@@ -60,8 +60,13 @@ export const useTimer = () => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   });
 
+  const progress = computed(() => {
+    return 100 - (timeLeft.value / modes[mode.value]) * 100;
+  });
+
   return {
     timeLeft,
+    modes,
     isRunning,
     start,
     stop,
@@ -69,5 +74,6 @@ export const useTimer = () => {
     setMode,
     modesListWithTime,
     formattedTime,
+    progress,
   };
 };
