@@ -11,6 +11,7 @@ export const useSound = () => {
     if (sound === "rain") {
       if (!isRainSoundPlaying.value) {
         rainAudio.play();
+        rainAudio.loop = true;
         isRainSoundPlaying.value = true;
       } else {
         rainAudio.pause();
@@ -21,6 +22,7 @@ export const useSound = () => {
     if (sound === "wind") {
       if (!isWindSoundPlaying.value) {
         windAudio.play();
+        windAudio.loop = true;
         isWindSoundPlaying.value = true;
       } else {
         windAudio.pause();

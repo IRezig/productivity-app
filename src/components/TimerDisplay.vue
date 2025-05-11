@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex flex-col items-center justify-center border-2 border-gray-300 rounded-lg p-4 shadow-md">
-            <p class="text-6xl font-bold">{{ formattedTime }}</p>
+            <p class="text-6xl font-bold" :style="{ color: theme.themeColors.text }">{{ formattedTime }}</p>
             <div
                 class="w-full h-2 bg-red-200 rounded-full relative mt-4"
                 role="progressbar"
@@ -51,15 +51,23 @@
                 </svg>
             </button>
         </div>
+        <div class="flex gap-2 justify-center items-center mt-4">
+            <button :class="theme.currentTheme === themeName ? 'bg-gray-300' : 'bg-gray-100'" v-for="themeName in themes" :key="themeName" @click="theme.setTheme(themeName)">
+                {{ themeName }}
+            </button>
+        </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useTimer } from '../composables/useTimer';
 import { useSound } from '../composables/useSound';
+import { useTheme } from '../themes';
 
 const { timeLeft, modes, isRunning, start, stop, reset, setMode, modesListWithTime, formattedTime, progress } = useTimer();
 const { playSound } = useSound();
+const themes = ['pastel', 'forest', 'ocean', 'berry'] as const
+const theme = useTheme();
 
 </script>
