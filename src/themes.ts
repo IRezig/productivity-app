@@ -56,8 +56,8 @@ export function provideTheme() {
   });
 
   const setTheme = (theme: ThemeName) => {
-    state.currentTheme = theme;
-    state.themeColors = themeMap[theme];
+    state.currentTheme = theme.toLowerCase() as ThemeName;
+    state.themeColors = themeMap[theme.toLowerCase() as ThemeName];
   };
 
   provide(ThemeSymbol, {
