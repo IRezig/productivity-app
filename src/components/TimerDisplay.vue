@@ -74,14 +74,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useTimer } from '../composables/useTimer';
 import { useSound } from '../composables/useSound';
 import { useTheme } from '../themes';
 
-const { timeLeft, modes, isRunning, start, stop, reset, setMode, modesListWithTime, formattedTime, progress } = useTimer();
+const { timeLeft, modes, isRunning, isCompleted, start, stop, reset, setMode, modesListWithTime, formattedTime, progress, showSuccessToast } = useTimer();
 const { playSound } = useSound();
 const themes = ['Pastel', 'Forest', 'Ocean', 'Berry'] as const
 const theme = useTheme();
+
+watch(isCompleted, () => {
+    if (isCompleted.value) {
+        console.log('isCompleted', isCompleted.value);
+        showSuccessToast();
+    }
+});
+
 
 </script>

@@ -1,10 +1,13 @@
 import { computed, ref } from "vue";
+import { useToast } from "./useToast";
 
 export const useTimer = () => {
+  const { showSuccess } = useToast();
   const modes = {
     pomodoro: 25 * 60,
     short: 5 * 60,
     long: 15 * 60,
+    test: 3,
   };
 
   const modesList = Object.keys(modes);
@@ -16,6 +19,7 @@ export const useTimer = () => {
   const mode = ref("pomodoro");
   const timeLeft = ref(modes[mode.value]);
   const isRunning = ref(false);
+  const isCompleted = ref(false);
   const timerId = ref<number | null>(null);
 
   const tick = () => {
@@ -23,6 +27,7 @@ export const useTimer = () => {
     timeLeft.value--;
     if (timeLeft.value <= 0) {
       stop();
+      isCompleted.value = true;
     }
   };
 
@@ -64,10 +69,16 @@ export const useTimer = () => {
     return 100 - (timeLeft.value / modes[mode.value]) * 100;
   });
 
+  const showSuccessToast = () => {
+    showSuccess(Math.max(1, Math.round(modes[mode.value] / 60)));
+    isCompleted.value = false;
+  };
+
   return {
     timeLeft,
     modes,
     isRunning,
+    isCompleted,
     start,
     stop,
     reset,
@@ -75,5 +86,6 @@ export const useTimer = () => {
     modesListWithTime,
     formattedTime,
     progress,
+    showSuccessToast,
   };
 };
