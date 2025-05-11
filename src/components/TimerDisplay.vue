@@ -40,9 +40,14 @@
             </button>
         </div>
         <div class="flex gap-2 justify-center items-center mt-4">
-            <button @click="playSound">
+            <button @click="playSound('rain')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                </svg>
+            </button>
+            <button @click="playSound('wind')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 12 6v12.75Z" />
                 </svg>
             </button>
         </div>
@@ -52,15 +57,9 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useTimer } from '../composables/useTimer';
+import { useSound } from '../composables/useSound';
 
 const { timeLeft, modes, isRunning, start, stop, reset, setMode, modesListWithTime, formattedTime, progress } = useTimer();
-
-const mode = ref("pomodoro");
-
-const audio = new Audio('/src/assets/sounds/rain.mp3');
-
-const playSound = () => {
-    audio.play();
-}
+const { playSound } = useSound();
 
 </script>
