@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div class="h-70 w-full flex flex-col items-center justify-center border-2  rounded-lg p-4 shadow-md" :style="{ backgroundColor: theme.themeColors.background }">
+        <h1 class="text-4xl font-bold text-center theme-transition" :style="{ color: theme.themeColors.text }" >
+            Deep Work
+          </h1>   
+        <div class="h-70 w-full flex flex-col items-center justify-center border-2 rounded-lg p-4 shadow-md mt-10" :style="{ backgroundColor: theme.themeColors.background }">
             <p class="text-6xl font-bold" :style="{ color: theme.themeColors.primary }">{{ formattedTime }}</p>
             <div
                 class="w-full h-2 rounded-full relative mt-8"
                 :style="{ backgroundColor: theme.themeColors.secondary }"
                 role="progressbar"
                 :aria-valuenow="progress"
-                aria-valuemin="0"
+                aria-valuemin="0" 
                 :aria-valuemax="100"
                 tabindex="0"
                 aria-label="Timer progress"
@@ -18,7 +21,7 @@
                 ></div>
             </div>
         </div>
-        <div class="flex gap-2 justify-center items-center mt-4 ">
+        <div class="flex gap-2 justify-center items-center mt-8">
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.secondary}` }" v-for="mode in modesListWithTime" :key="mode.name" @click="setMode(mode.name)">
                 {{ mode.name }}
             </button>
@@ -43,19 +46,28 @@
        
         <h3 class="text-2xl font-bold mt-4 flex items-center gap-2 justify-center" :style="{ color: theme.themeColors.text }"> 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
             </svg>
             Sounds
         </h3>
         <div class="flex gap-2 justify-center items-center mt-4">
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.primary}` }" @click="playSound('rain')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                <!-- Cloud -->
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                
+                <!-- Raindrops -->
+                <line x1="8" y1="18" x2="8" y2="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/>
+                <line x1="12" y1="18" x2="12" y2="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/>
+                <line x1="16" y1="18" x2="16" y2="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/>
                 </svg>
+
             </button>
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.primary}` }" @click="playSound('wind')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 12 6v12.75Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h12a2 2 0 1 0-2-2" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16a2 2 0 1 1-2 2" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2 16h10a2 2 0 1 0-2 2" />
                 </svg>
             </button>
         </div>
