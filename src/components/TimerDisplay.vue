@@ -28,26 +28,18 @@
         </div>
         <div class="flex gap-2 justify-center items-center mt-4">
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.secondary}` }" v-if="!isRunning" @click="start">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                </svg>
+                <PlayIcon class="size-6" />
             </button>
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.secondary}` }" v-if="isRunning" @click="stop">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
-                </svg>
+                <StopIcon class="size-6" />
             </button>
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.secondary}` }" @click="reset">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                </svg>
+                <ArrowPathRoundedSquareIcon class="size-6" />
             </button>
         </div>
        
         <h3 class="text-2xl font-bold mt-4 flex items-center gap-2 justify-center" :style="{ color: theme.themeColors.text }"> 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
-            </svg>
+            <SpeakerWaveIcon class="size-6" />
             Sounds
         </h3>
         <div class="flex gap-2 justify-center items-center mt-4">
@@ -72,35 +64,31 @@
             </button>
         </div>
         <h3 class="text-2xl font-bold mt-4 flex items-center gap-2 justify-center" :style="{ color: theme.themeColors.text }"> 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75v16.5M2.25 12h19.5M6.375 17.25a4.875 4.875 0 0 0 4.875-4.875V12m6.375 5.25a4.875 4.875 0 0 1-4.875-4.875V12m-9 8.25h16.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v13.5a1.5 1.5 0 0 0 1.5 1.5Zm12.621-9.44c-1.409 1.41-4.242 1.061-4.242 1.061s-.349-2.833 1.06-4.242a2.25 2.25 0 0 1 3.182 3.182ZM10.773 7.63c1.409 1.409 1.06 4.242 1.06 4.242S9 12.22 7.592 10.811a2.25 2.25 0 1 1 3.182-3.182Z" />
-            </svg>
+            <BeakerIcon class="size-6" />
             Themes
         </h3>
         <div class="flex gap-2 justify-center items-center mt-4">
             <button :style="{ backgroundColor: theme.themeColors.background, color: theme.themeColors.text, border: `2px solid ${theme.themeColors.primary}` }" v-for="themeName in themes" :key="themeName" @click="theme.setTheme(themeName)">
-                {{ themeName }}
+                {{ themeName.charAt(0).toUpperCase() + themeName.slice(1) }}
             </button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { watch } from 'vue';
 import { useTimer } from '../composables/useTimer';
 import { useSound } from '../composables/useSound';
 import { useTheme } from '../themes';
+import { BeakerIcon, PlayIcon, StopIcon, SpeakerWaveIcon, ArrowPathRoundedSquareIcon } from '@heroicons/vue/24/outline'
 
-const { timeLeft, modes, isRunning, isCompleted, start, stop, reset, setMode, modesListWithTime, formattedTime, progress, showSuccessToast } = useTimer();
+const {  isRunning, isCompleted, start, stop, reset, setMode, modesListWithTime, formattedTime, progress, showSuccessToast } = useTimer();
 const { playSound } = useSound();
-const themes = ['Pastel', 'Forest', 'Ocean', 'Berry'] as const
+const themes = ['pastel', 'forest', 'ocean', 'berry'] as const
 const theme = useTheme();
 
 watch(isCompleted, () => {
-    if (isCompleted.value) {
-        console.log('isCompleted', isCompleted.value);
-        showSuccessToast();
-    }
+    if (isCompleted.value) showSuccessToast();
 });
 
 
